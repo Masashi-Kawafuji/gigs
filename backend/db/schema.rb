@@ -10,7 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_21_152113) do
+ActiveRecord::Schema.define(version: 2020_11_21_165916) do
+
+  create_table "ganres", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "gigs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+    t.date "held_on", null: false
+    t.boolean "published", default: false, null: false
+    t.string "place_id"
+    t.string "venue"
+    t.integer "charge"
+    t.boolean "drink_included", default: false, null: false
+    t.integer "drink_quantity"
+    t.time "open_at"
+    t.time "start_at"
+    t.text "description"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "ganre_id"
+    t.index ["ganre_id"], name: "index_gigs_on_ganre_id"
+    t.index ["user_id"], name: "index_gigs_on_user_id"
+  end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -31,4 +56,6 @@ ActiveRecord::Schema.define(version: 2020_11_21_152113) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "gigs", "ganres"
+  add_foreign_key "gigs", "users"
 end
