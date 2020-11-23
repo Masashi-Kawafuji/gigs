@@ -1,4 +1,6 @@
 class Gig < ApplicationRecord
+  belongs_to :user
+  
   validates :held_on, presence: true
   validates :published, presence: true
   validates :drink_quantity, presence: true, if: -> { drink_included }
