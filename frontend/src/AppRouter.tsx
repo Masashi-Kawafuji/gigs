@@ -1,8 +1,12 @@
 import React from 'react';
+import { Switch, Route } from 'react-router-dom';
+import SignUp from 'pages/SignUp';
 
 const AppRouter: React.FC = () => {
   return (
-    <div>AppRouter</div>
+    <Switch>
+      <Route path='/sign-up' component={SignUp} />
+    </Switch>
   );
 }
 
