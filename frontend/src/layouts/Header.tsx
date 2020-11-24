@@ -10,19 +10,10 @@ const useStyles = makeStyles((theme: Theme) =>
     title: {
       flex: 1
     },
-    buttons: {
+    AuthActions: {
       '& > *': {
-        marginLeft: theme.spacing(1),
+        marginLeft: theme.spacing(1)
       }
-    },
-    modal: {
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center'
-    },
-    paper: {
-      outline: 0,
-      width: 600,
     }
   })
 );
@@ -35,7 +26,7 @@ const Header: React.FC = () => {
       <AppBar color='inherit' position='fixed'>
         <Toolbar>
           <div className={classes.title}>App Name</div>
-          <div className={classes.buttons}>
+          <div className={classes.AuthActions}>
             <Button
               component={Link}
               to='/login'

@@ -6,11 +6,9 @@ import InputLabel from '@material-ui/core/InputLabel';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import Button from '@material-ui/core/Button';
 
-type SignUpForm = {
+type LoginForm = {
   email: string;
   password: string;
-  password_confirmation: string;
-  name: string;
 };
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -24,17 +22,15 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const SignUp: React.FC = () => {
-  const [signUpForm, setSignUpForm] = useState<SignUpForm>({
+const Login: React.FC = () => {
+  const [LoginForm, setLoginForm] = useState<LoginForm>({
     email: '',
     password: '',
-    password_confirmation: '',
-    name: ''
   });
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    setSignUpForm({ ...signUpForm, [name]: value });
+    setLoginForm({ ...LoginForm, [name]: value });
   }
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -53,7 +49,7 @@ const SignUp: React.FC = () => {
               id='email'
               name='email'
               label='メールアドレス'
-              value={signUpForm.email}
+              value={LoginForm.email}
               onChange={handleInputChange}
             />
           </FormControl>
@@ -63,32 +59,14 @@ const SignUp: React.FC = () => {
               id='password'
               name='password'
               label='パスワード'
-              value={signUpForm.password}
-              onChange={handleInputChange} />
-          </FormControl>
-          <FormControl fullWidth required variant='outlined' margin='dense'>
-            <InputLabel htmlFor='password-comfirmation'>パスワード（確認）</InputLabel>
-            <OutlinedInput
-              id='password-comfirmation'
-              name='password_confirmation'
-              label='パスワード（確認）'
-              value={signUpForm.password_confirmation}
-              onChange={handleInputChange} />
-          </FormControl>
-          <FormControl fullWidth required variant='outlined' margin='dense'>
-            <InputLabel htmlFor='user-name'>ユーザー名</InputLabel>
-            <OutlinedInput
-              id='user-name'
-              name='name'
-              label='ユーザー名'
-              value={signUpForm.name}
+              value={LoginForm.password}
               onChange={handleInputChange} />
           </FormControl>
         </div>
-        <Button type='submit' variant='contained' color='primary' fullWidth>新規登録</Button>
+        <Button type='submit' variant='contained' color='primary' fullWidth>ログイン</Button>
       </form>
     </Container>
   );
 }
 
-export default SignUp;
+export default Login;
