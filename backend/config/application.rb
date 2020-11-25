@@ -43,5 +43,7 @@ module App
         helper_specs: false,
         routing_specs: false
     end
+
+    config.autoload_paths << Rails.root.join('lib')
   end
 end
