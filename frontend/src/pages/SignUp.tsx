@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import useForm from 'hooks/useForm';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import FormControl from '@material-ui/core/FormControl';
@@ -25,17 +26,12 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const SignUp: React.FC = () => {
-  const [signUpForm, setSignUpForm] = useState<SignUpForm>({
+  const [signUpForm, handleInputChange] = useForm<SignUpForm>({
     email: '',
     password: '',
     password_confirmation: '',
     name: ''
   });
-
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setSignUpForm({ ...signUpForm, [name]: value });
-  }
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

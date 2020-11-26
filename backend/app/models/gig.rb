@@ -1,5 +1,6 @@
 class Gig < ApplicationRecord
   belongs_to :user
+  belongs_to :ganre
   
   validates :held_on, presence: true
   validates :published, presence: true
