@@ -43,7 +43,9 @@ module App
         helper_specs: false,
         routing_specs: false
     end
-
+    
     config.autoload_paths << Rails.root.join('lib')
+
+    config.middleware.use ActionDispatch::Cookies
   end
 end
