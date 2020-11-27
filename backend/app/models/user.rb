@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  before_create :generate_activate_token
+  
   has_secure_password
   has_secure_password :activate_token, validations: false
   has_secure_password :reset_password_token, validations: false
@@ -21,6 +23,11 @@ class User < ApplicationRecord
   
   private
 
+  def generate_activate_token
+    activate_token = SecureRandom.urlsafe_base64
+    activate_token_sent_at = Time.current
+  end
+  
   def is_activate_token_expired?
     activate_token_sent_at >= Time.current + 1.day
   end

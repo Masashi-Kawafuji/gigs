@@ -12,6 +12,8 @@ services:
     build: ./backend
     stdin_open: true
     tty: true
+    environment: 
+      EDITOR: vim
     volumes:
       - ./backend:/usr/src/app
     depends_on: 
