@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import LoggedInUserContext from 'contexts/LoggedInUserContext';
 import useForm from 'hooks/useForm';
 import api from 'services/api';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
@@ -25,6 +26,8 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const Login: React.FC = () => {
+  const { setLoggedInUser } = useContext(LoggedInUserContext);
+
   const [loginForm, handleInputChange] = useForm<LoginForm>({
     email: '',
     password: '',
@@ -35,6 +38,8 @@ const Login: React.FC = () => {
     api.post('/v1/login', loginForm)
       .then(response => {
         console.log(response);
+        const { user } = response.data;
+        setLoggedInUser(user);
       })
       .catch(error => {
         console.log(error);

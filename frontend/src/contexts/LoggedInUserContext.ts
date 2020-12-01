@@ -1,4 +1,4 @@
-import React, { SetStateAction } from 'react';
+import React from 'react';
 
 type LoggedInUser = {
   id: number;
@@ -7,17 +7,18 @@ type LoggedInUser = {
   avatar: string | null;
 } | null;
 
-type AuthorizedUserContextValue = {
+type LoggedInUserContextValue = {
   loggedInUser: LoggedInUser;
-  setLoggedInUser?: React.Dispatch<SetStateAction<LoggedInUser>>;
+  setLoggedInUser: React.Dispatch<React.SetStateAction<LoggedInUser>>;
   isLoggedIn: boolean;
 };
 
 const initialValue = {
   loggedInUser: null,
+  setLoggedInUser: () => { },
   isLoggedIn: false
 };
 
-const LoggedInUserContext = React.createContext<AuthorizedUserContextValue>(initialValue);
+const LoggedInUserContext = React.createContext<LoggedInUserContextValue>(initialValue);
 
 export default LoggedInUserContext;

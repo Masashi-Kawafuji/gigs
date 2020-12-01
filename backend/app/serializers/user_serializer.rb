@@ -3,7 +3,6 @@ class UserSerializer
 
   attributes :id,
     :name, 
-    :email, 
     :role,
     :avatar
 end

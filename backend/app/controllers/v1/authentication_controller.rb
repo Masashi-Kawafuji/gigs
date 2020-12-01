@@ -13,7 +13,7 @@ module V1
     end
     
     def logout
-      cookies.encrypted.delete(:user_id)
+      cookies.delete(:jwt)
       head :no_content
     end
     
@@ -21,7 +21,7 @@ module V1
       if current_user.present?
         render json: { user: UserSerializer.new(current_user).serializable_hash[:data][:attributes] }
       else
-        render json: { message: 'ログインしていません。' }
+        head :unauthorized
       end
     end
 
