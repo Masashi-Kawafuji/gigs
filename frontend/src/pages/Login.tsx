@@ -1,5 +1,6 @@
 import React from 'react';
 import useForm from 'hooks/useForm';
+import api from 'services/api';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import FormControl from '@material-ui/core/FormControl';
@@ -31,6 +32,13 @@ const Login: React.FC = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    api.post('/v1/login', loginForm)
+      .then(response => {
+        console.log(response);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
   const classes = useStyles();

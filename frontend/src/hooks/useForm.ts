@@ -6,7 +6,6 @@ const useForm = <T>(formContent: T): [T, (event: React.ChangeEvent<HTMLInputElem
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setForm({ ...form, [name]: value });
-    console.log(form)
   }
 
   return [form, handleChange];

@@ -1,6 +1,6 @@
 module V1
   class UsersController < ApplicationController
-    skip_before_action :require_login, only: :create
+    skip_before_action :require_login, only: [:create, :activate]
     
     def create
       @user = User.new(user_params)
@@ -14,8 +14,8 @@ module V1
 
     def activate
       user = User.find_by(email: params[:email])
-      if user&.authenticate_activate_token(params[:activate_token]) && user.deserves_to_activate?
-        user.activate!
+      if user&.authenticate_activate_token(params[:activate_token]) && !user.activate_token_expired?
+        user.activate
         head :ok
       else
         head :not_acceptable
@@ -42,7 +42,7 @@ module V1
     end
 
     def send_activate_account_email
-      UserMailer.with(user: @user).activate_account_email.deliver_later
+      UserMailer.with(user: @user, activate_token: @user.activate_token).activate_account_email.deliver_later
     end
   end
 end

@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  before_create :generate_activate_token
+  before_create :set_activate_token
   
   has_secure_password
   has_secure_password :activate_token, validations: false
@@ -13,22 +13,18 @@ class User < ApplicationRecord
   validates :role, presence: true, inclusion: { in: %w(musician spectator) }
   validates :biography, length: { maximum: 1000 }
 
-  def activate!
-    update!(activated: true)
-  end
-
-  def deserves_to_activate?
-    !(activated && is_activate_token_expired?)
+  def activate
+    update_attribute(:activated, true)
   end
   
+  def activate_token_expired?
+    activate_token_sent_at + 1.day <= Time.current
+  end
+
   private
 
-  def generate_activate_token
-    activate_token = SecureRandom.urlsafe_base64
-    activate_token_sent_at = Time.current
-  end
-  
-  def is_activate_token_expired?
-    activate_token_sent_at >= Time.current + 1.day
+  def set_activate_token
+    self.activate_token = SecureRandom.urlsafe_base64
+    self.activate_token_sent_at = Time.current
   end
 end

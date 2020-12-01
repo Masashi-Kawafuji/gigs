@@ -42,7 +42,7 @@ const SignUp: React.FC = () => {
       })
       .catch(error => {
         console.log(error);
-      })
+      });
   }
 
   const classes = useStyles();
@@ -67,6 +67,7 @@ const SignUp: React.FC = () => {
               id='password'
               name='password'
               label='パスワード'
+              type='password'
               value={signUpForm.password}
               onChange={handleInputChange} />
           </FormControl>
@@ -76,6 +77,7 @@ const SignUp: React.FC = () => {
               id='password-comfirmation'
               name='password_confirmation'
               label='パスワード（確認）'
+              type='password'
               value={signUpForm.password_confirmation}
               onChange={handleInputChange} />
           </FormControl>
