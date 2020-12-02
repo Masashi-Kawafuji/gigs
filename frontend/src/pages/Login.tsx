@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import LoggedInUserContext from 'contexts/LoggedInUserContext';
 import useForm from 'hooks/useForm';
 import api from 'services/api';
@@ -33,6 +34,8 @@ const Login: React.FC = () => {
     password: '',
   });
 
+  const history = useHistory();
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     api.post('/v1/login', loginForm)
@@ -40,6 +43,7 @@ const Login: React.FC = () => {
         console.log(response);
         const { user } = response.data;
         setLoggedInUser(user);
+        history.push('/');
       })
       .catch(error => {
         console.log(error);
@@ -68,6 +72,7 @@ const Login: React.FC = () => {
               id='password'
               name='password'
               label='パスワード'
+              type='password'
               value={loginForm.password}
               onChange={handleInputChange} />
           </FormControl>
